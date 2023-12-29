@@ -1,0 +1,57 @@
+Select,a{
+    appearance: none;
+    text-align: center;
+    background-color:#D9D9D9;
+    width: 250px;
+    height: 40px;
+    margin: 10px;
+    /* width: 100px;     */
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+  width: 150px;  
+  height: 30px;
+}
+.location{
+    padding: 5px;
+    margin: 10px;
+    background-color:#D9D9D9;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.btn{
+    width: 100%;
+    margin: auto;
+}
+
+button{
+    width: 100px;
+}
+.job-profile{
+         display: flex;
+        /* flex-direction: column;  */
+}
+.job-lists{
+    padding: 10px;
+    background-color: #D9D9D9;
+    width: 100%;
+}
+
+.list{
+    height: 40px;
+    width: 100%;
+    margin: 10px;
+    background-color: white;
+}
+
+
+
+
