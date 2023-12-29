@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,22 +11,63 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    contactnumber:'',
+    password: '',
+   
+
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    fetch("http://localhost:8000/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Signup successful toast
+          toast.success("Signup successful: " + data.message);
+          console.log("Signup successful:", data);
+          navigate("/login");
+        } else {
+          // Signup failed toast
+          toast.error("Signup failed: " + data.message);
+          console.error("Signup failed:", data.message);
+        }
+      })
+      .catch((error) => {
+        // Error toast
+        toast.error("Error: " + error.message);
+        console.error("Error:", error);
+      });
+  };
+  
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme}><ToastContainer />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -53,8 +93,10 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label="fname"
                   autoFocus
+                  value={formData.fname}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -63,8 +105,10 @@ export default function SignUp() {
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
+                  name="lname"
                   autoComplete="family-name"
+                  value={formData.lname}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -75,6 +119,20 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="contactnumber"
+                  label="Contact No."
+                  name="number"
+                  autoComplete="contactnumber"
+                  value={formData.number}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,12 +144,15 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
               </Grid>
-              
+            
             </Grid>
             <Button
               type="submit"
+              value="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -107,7 +168,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-       
       </Container>
     </ThemeProvider>
   );

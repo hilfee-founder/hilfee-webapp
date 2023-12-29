@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,24 +13,65 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await fetch("http://localhost:8000/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+     
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(errorData.message);
+
+        console.error("Server error:", errorData.message);
+        return;
+      }
+  
+      const data = await response.json();
+      
+      if (data.success) {
+        console.log("Login successful:", data.message);
+        navigate("/profile");
+      } else {
+        console.error("Login failed:", data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  
+  
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme}><ToastContainer />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -56,6 +98,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={formData.email}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -66,11 +110,10 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={formData.password}
+              onChange={handleChange}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -80,11 +123,7 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs></Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -93,7 +132,6 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-       
       </Container>
     </ThemeProvider>
   );
