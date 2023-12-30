@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,19 +11,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    companyname:'',
+    fname: '',
+    lname: '',
+    companyName:'',
     designation:'',
     email: '',
-    contactnumber:'',
+    number:'',
     password: '',
    
 
@@ -39,12 +38,35 @@ export default function SignUp() {
   };
 
 
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log('Form submitted:', formData);
-
-   
+  
+    fetch("http://localhost:8000/hr/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Signup successful toast
+          toast.success("Signup successful: " + data.message);
+          console.log("Signup successful:", data);
+          navigate("/Hrlogin");
+        } else {
+          // Signup failed toast
+          toast.error("Signup failed: " + data.message);
+          console.error("Signup failed:", data.message);
+        }
+      })
+      .catch((error) => {
+        // Error toast
+        toast.error("Error: " + error.message);
+        console.error("Error:", error);
+      });
   };
   return (
     <ThemeProvider theme={defaultTheme}><ToastContainer />
@@ -69,7 +91,7 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="fname"
                   required
                   fullWidth
                   id="firstName"
@@ -97,9 +119,9 @@ export default function SignUp() {
                   fullWidth
                   id="companyname"
                   label="Name Of Company"
-                  name="companyname"
+                  name="companyName"
                   autoComplete="family-name"
-                  value={formData.companyname}
+                  value={formData.companyName}
                   onChange={handleChange}
                 />
               </Grid>
@@ -128,16 +150,17 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="contactnumber"
-                  label="Contact No."
-                  name="number"
-                  autoComplete="contactnumber"
-                  value={formData.number}
-                  onChange={handleChange}
-                />
+              <TextField
+               required
+   fullWidth
+   id="number"
+   label="Contact No."
+   name="number"
+   autoComplete="contactnumber"
+   value={formData.number}
+   onChange={handleChange}
+                inputProps={{ pattern: "[0-9]*" }}
+               />
               </Grid>
               <Grid item xs={12}>
                 <TextField

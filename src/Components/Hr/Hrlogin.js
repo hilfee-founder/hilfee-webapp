@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
@@ -26,19 +27,48 @@ export default function SignIn() {
     });
   
     const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    };
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-  
-     
-      console.log('Form submitted:', formData);
-    };
+        const { name, value } = event.target;
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      };
+      const navigate = useNavigate();
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+      
+        try {
+          const response = await fetch("http://localhost:8000/hr/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              password: formData.password,
+            }),
+          });
+         
+          if (!response.ok) {
+            const errorData = await response.json();
+            toast.error(errorData.message);
+    
+            console.error("Server error:", errorData.message);
+            return;
+          }
+      
+          const data = await response.json();
+          
+          if (data.success) {
+            console.log("Login successful:", data.message);
+            navigate("/Hrprofile");
+          } else {
+            console.error("Login failed:", data.message);
+          }
+        } catch (error) {
+          console.error("Error:", error.message);
+        }
+      };
   
     return (
       <ThemeProvider theme={defaultTheme}>
@@ -66,7 +96,7 @@ export default function SignIn() {
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="hemail"
+                name="email"
                 autoComplete="email"
                 autoFocus
                 value={formData.email}
@@ -76,7 +106,7 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="hpassword"
+                name="password"
                 label="Password"
                 type="password"
                 id="password"
