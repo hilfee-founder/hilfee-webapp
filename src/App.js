@@ -6,6 +6,8 @@ import Home from "./Components/Home.js";
 import Profile from "./Components/Profile.js";
 import Hrlogin from "./Components/Hr/Hrlogin.js";
 import Hrsignup from "./Components/Hr/Hrsignup.js";
+import Hrprofile from "./Components/Hr/Hrprofile.js";
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
 
           <Route exact path="/hrlogin" element={<Hrlogin />}></Route>
           <Route exact path="/hrsignup" element={<Hrsignup />}></Route>
+          <Route exact path="/hrprofile" element={<Hrprofile/>}></Route>
 
 
         
