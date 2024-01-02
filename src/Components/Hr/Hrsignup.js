@@ -84,7 +84,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            HR Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -95,7 +95,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="fname"
+                  label="First Name"
                   autoFocus
                   value={formData.fname}
                   onChange={handleChange}
@@ -105,7 +105,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lname"
                   label="Last Name"
                   name="lname"
                   autoComplete="family-name"
@@ -117,7 +117,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="companyname"
+                  id="companyName"
                   label="Name Of Company"
                   name="companyName"
                   autoComplete="family-name"
@@ -150,17 +150,16 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-              <TextField
-               required
-   fullWidth
-   id="number"
-   label="Contact No."
-   name="number"
-   autoComplete="contactnumber"
-   value={formData.number}
-   onChange={handleChange}
-                inputProps={{ pattern: "[0-9]*" }}
-               />
+                <TextField
+                  required
+                  fullWidth
+                  id="number"
+                  label="Contact No."
+                  name="number"
+                  autoComplete="contactnumber"
+                  value={formData.number}
+                  onChange={handleChange}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -184,7 +183,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+             HR Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
