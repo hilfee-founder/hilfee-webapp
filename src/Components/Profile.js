@@ -9,20 +9,20 @@ import axios from "axios";
 
 const currencies = [
   {
-    value: "USD",
-    label: "$",
+    value: "X",
+    label: "X",
   },
   {
-    value: "EUR",
-    label: "€",
+    value: "Y",
+    label: "Y",
   },
   {
-    value: "BTC",
-    label: "฿",
+    value: "Z",
+    label: "Z",
   },
   {
-    value: "JPY",
-    label: "¥",
+    value: "W",
+    label: "W",
   },
 ];
 
@@ -48,7 +48,6 @@ const ProfileForm = () => {
     const newlocations = technicalSkills.filter((locs) => {
       return locs !== e.target.value;
     });
-    //   setLocation([newlocations]);
     setTechnicalSkills([...newlocations, e.target.value]);
   };
 
@@ -59,19 +58,9 @@ const ProfileForm = () => {
     setTechnicalSkills(newlocations);
   };
 
-  // const handleCheckboxChange = (language) => {
-  //   const updatedLanguages = [...programmingLanguages];
-  //   const index = updatedLanguages.indexOf(language);
-  //   if (index === -1) {
-  //     updatedLanguages.push(language);
-  //   } else {
-  //     updatedLanguages.splice(index, 1);
-  //   }
-  //   setProgrammingLanguages(updatedLanguages);
-  // };
 
   const handleSubmit = async (e) => {
-
+    e.preventDefault()
     const formData = {
       fullName,
       email,
@@ -104,10 +93,19 @@ const ProfileForm = () => {
           },
         }
       );
-      console.log(data.message);
+      alert("Data successfully submitted")
       setSuccessMessage("Data successfully submitted");
     } catch (error) {
-      console.error("Error:", error);
+      console.log(error);
+      if(error.response.status==499){
+        alert("Enter all the required fields")
+      }
+      else if(error.response.status==422){
+        alert("Wrong Credentials")
+      }
+      else{
+        alert("Something went wrong")
+      }
     }
   };
 
@@ -118,6 +116,7 @@ const ProfileForm = () => {
         id="standard-basic"
         label="Full Name"
         variant="outlined"
+        required
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
       />
@@ -125,6 +124,7 @@ const ProfileForm = () => {
         id="standard-basic"
         label="Email"
         variant="outlined"
+        required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -132,6 +132,7 @@ const ProfileForm = () => {
         id="standard-basic"
         label="Phone Number"
         variant="outlined"
+        required    
         value={contactNo}
         onChange={(e) => setContactNo(e.target.value)}
       />
@@ -139,7 +140,7 @@ const ProfileForm = () => {
       <input
         type="file"
         name="CV"
-        // value={cvupload}
+        required
         onChange={(e) => setCvupload(e.target.files[0])}
       />
       <label>Education:</label>
@@ -158,6 +159,7 @@ const ProfileForm = () => {
             label="Select"
             defaultValue="EUR"
             value={college}
+            required
             onChange={(e) => setCollege(e.target.value)}
             helperText="Please select your college"
           >
@@ -173,6 +175,7 @@ const ProfileForm = () => {
             label="Select"
             defaultValue="EUR"
             value={degree}
+            required
             onChange={(e) => setDegree(e.target.value)}
             helperText="Please select your degree"
           >
@@ -187,6 +190,7 @@ const ProfileForm = () => {
             select
             label="Select"
             value={specialization}
+            required
             onChange={(e) => setSpecialization(e.target.value)}
             defaultValue="EUR"
             helperText="Please select your specialization"
@@ -203,6 +207,7 @@ const ProfileForm = () => {
             label="Select"
             defaultValue="EUR"
             value={clgDuration}
+            required
             onChange={(e) => setClgDuration(e.target.value)}
             helperText="Please select your duration"
           >
@@ -286,6 +291,7 @@ const ProfileForm = () => {
           type="text"
           name="clocation"
           value={currentLocation}
+          required
           onChange={(e) => setCurrentLocation(e.target.value)}
         />
       </label>
