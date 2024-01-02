@@ -77,7 +77,7 @@ const Nav = () => {
     navigate('/signup')
   }
   const linkToHrSignup=()=>{
-    navigate('/hrsignup')
+    navigate('/hr/signup')
   }
 
   const handleProfileMenuOpen = (event) => {
@@ -198,7 +198,7 @@ const Nav = () => {
           <ButtonGroup variant="contained" aria-label="outlined primary button group">
           <Button onClick={linkToLogin}>Login</Button>
             <Button onClick={linkToSignup}>Signup</Button>
-            <Button  style={{width:"150px"}}>HIRE TALENT</Button>
+            <Button onClick={linkToHrSignup} style={{width:"150px"}}>HIRE TALENT</Button>
           </ButtonGroup>
             
            

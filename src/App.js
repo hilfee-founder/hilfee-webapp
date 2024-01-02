@@ -16,15 +16,14 @@ function App() {
         <Routes>
           <Route path="/" exact index element={<Home />} />
 
-
-          {/* Auth Routes   */}
+          {/* Auth Routes   */} 
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
           <Route exact path="/profile" element={<Profile />}></Route>
 
-          <Route exact path="/hrlogin" element={<Hrlogin />}></Route>
-          <Route exact path="/hrsignup" element={<Hrsignup />}></Route>
-          <Route exact path="/hrprofile" element={<Hrprofile/>}></Route>
+          <Route exact path="/hr/login" element={<Hrlogin />}></Route>
+          <Route exact path="/hr/signup" element={<Hrsignup />}></Route>
+          <Route exact path="/hr/profile" element={<Hrprofile/>}></Route>
 
 
         
