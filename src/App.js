@@ -7,6 +7,7 @@ import Profile from "./Components/Profile.js";
 import Hrlogin from "./Components/Hr/Hrlogin.js";
 import Hrsignup from "./Components/Hr/Hrsignup.js";
 import Hrprofile from "./Components/Hr/Hrprofile.js";
+import RecordVideo from "./Components/video resume/recordVideo.js";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact index element={<Home />} />
+          <Route path="/recordvideo" exact index element={<RecordVideo />} />
 
           {/* Auth Routes   */} 
           <Route exact path="/login" element={<Login />}></Route>
