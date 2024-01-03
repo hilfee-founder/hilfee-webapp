@@ -14,7 +14,7 @@
 .textArea {
     border: 1px solid;
     margin-top: 1rem;
-    height: 12rem;
+    display: flex;
 }
 
 .filePath {

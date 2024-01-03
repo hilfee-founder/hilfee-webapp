@@ -325,7 +325,24 @@ function RecordVideo() {
             <h4 className='mx-5 mt-4'>AI Genrative Feedback:</h4>
 
             <div className='container textArea'>
-                {feedback}
+
+                <ul>
+                    <li>
+                        {transcribe.map((e) => {
+                            return (
+                                <>
+                                    {e.feedback}
+
+                                </>
+                            )
+                        })}
+                    </li>
+                    <br/>
+                    <li>
+                        {feedback}
+
+                    </li>
+                </ul>
             </div>
 
 
