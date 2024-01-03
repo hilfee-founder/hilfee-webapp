@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const currencies = [
   {
@@ -108,6 +109,11 @@ const ProfileForm = () => {
       }
     }
   };
+
+   const navigate = useNavigate();
+  const linkToVideo = ()=>{
+    navigate('/recordvideo');
+  }
 
   return (
     <div>
@@ -325,7 +331,8 @@ const ProfileForm = () => {
         })}
       </div>
       <div>
-        <button style={{ width: "150px", margin: "20px" }}>Record Video</button>
+          <button onClick={linkToVideo} style={{ width: "150px", margin: "20px" }}>Record Video</button>
+        
         <button style={{ width: "150px", margin: "20px" }}>Update</button>
         <button style={{ width: "150px", margin: "20px" }}>Feedback</button>
         <button

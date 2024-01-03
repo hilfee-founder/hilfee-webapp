@@ -1,0 +1,23 @@
+.mainBox {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid grey;
+    margin-top: 5rem;
+}
+
+.showFile {
+    border: 1px solid black;
+    height: 15rem;
+    width: 30rem;
+}
+
+.textArea {
+    border: 1px solid;
+    margin-top: 1rem;
+    height: 12rem;
+}
+
+.filePath {
+    border: 1px solid grey;
+    padding: 1rem 2rem 0rem 2rem;
+}
