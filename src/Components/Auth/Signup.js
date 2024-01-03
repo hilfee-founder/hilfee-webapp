@@ -18,10 +18,10 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fname: '',
+    lname: '',
     email: '',
-    contactnumber:'',
+    number:'',
     password: '',
    
 
@@ -82,14 +82,14 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Candidate Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="fname"
                   required
                   fullWidth
                   id="firstName"
