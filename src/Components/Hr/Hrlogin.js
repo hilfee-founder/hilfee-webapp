@@ -61,7 +61,7 @@ export default function SignIn() {
           
           if (data.success) {
             console.log("Login successful:", data.message);
-            navigate("/Hrprofile");
+            navigate("/hr/profile");
           } else {
             console.error("Login failed:", data.message);
           }

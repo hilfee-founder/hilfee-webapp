@@ -3,6 +3,7 @@ import '../Assets/Styles/videoresume.css';
 // import { DefaultPlayer as Video } from 'react-html5video';
 // import ReactPlayer from 'react-player';
 import RecordRTC from 'recordrtc';
+import Nav from '../Nav';
 
 function RecordVideo() {
     const [file, setFile] = useState(null);
@@ -210,6 +211,7 @@ function RecordVideo() {
 
     return (
         <div>
+            <Nav />
             <div className='container mainBox'>
                 <div>
                     {file || recordedBlob ?
@@ -337,7 +339,7 @@ function RecordVideo() {
                             )
                         })}
                     </li>
-                    <br/>
+                    <br />
                     <li>
                         {feedback}
 

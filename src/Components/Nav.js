@@ -80,8 +80,13 @@ const Nav = () => {
     navigate('/hr/signup')
   }
 
+  const linkToProfile =()=>{
+    navigate('/profile')
+  }
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+
   };
 
   const handleMobileMenuClose = () => {
@@ -114,7 +119,7 @@ const Nav = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={linkToProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Applied Jobs</MenuItem>
       <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
     </Menu>
@@ -172,11 +177,15 @@ const Nav = () => {
     </Menu>
   );
 
+  const linkToHome = ()=>{
+    navigate('/')
+  }
+
   return (
     <Box sx={{ flexGrow: 1, marginBottom:"10px"}}>
       <AppBar position="static">
         <Toolbar>
-           LOGO
+           <button onClick={linkToHome}>LOGO</button>
           <Typography
             variant="h6"
             noWrap
