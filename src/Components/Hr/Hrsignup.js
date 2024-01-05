@@ -13,15 +13,17 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {url} from '../Constant.js';
-
 
 const defaultTheme = createTheme();
+import {url} from '../Constant.js';
+
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
+    companyName:'',
+    designation:'',
     email: '',
     number:'',
     password: '',
@@ -37,11 +39,12 @@ export default function SignUp() {
     });
   };
 
+
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
   
-    fetch(`${url}/user/signup`, {
+    fetch(`${url}/hr/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +57,7 @@ export default function SignUp() {
           // Signup successful toast
           toast.success("Signup successful: " + data.message);
           console.log("Signup successful:", data);
-          navigate("/login");
+          navigate("/hr/login");
         } else {
           // Signup failed toast
           toast.error("Signup failed: " + data.message);
@@ -67,7 +70,6 @@ export default function SignUp() {
         console.error("Error:", error);
       });
   };
-  
   return (
     <ThemeProvider theme={defaultTheme}><ToastContainer />
       <Container component="main" maxWidth="xs">
@@ -84,7 +86,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Candidate Sign up
+            HR Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -95,7 +97,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="fname"
+                  label="First Name"
                   autoFocus
                   value={formData.fname}
                   onChange={handleChange}
@@ -105,11 +107,35 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lname"
                   label="Last Name"
                   name="lname"
                   autoComplete="family-name"
                   value={formData.lname}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="companyName"
+                  label="Name Of Company"
+                  name="companyName"
+                  autoComplete="family-name"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="designation"
+                  label="Designation"
+                  name="designation"
+                  autoComplete="family-name"
+                  value={formData.designation}
                   onChange={handleChange}
                 />
               </Grid>
@@ -129,7 +155,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="contactnumber"
+                  id="number"
                   label="Contact No."
                   name="number"
                   autoComplete="contactnumber"
@@ -159,11 +185,11 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+             HR Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Login" variant="body2">
+                <Link href="/hr/login" variant="body2">
                   Already have an account? Login
                 </Link>
               </Grid>
