@@ -4,6 +4,7 @@ import '../Assets/Styles/videoresume.css';
 // import ReactPlayer from 'react-player';
 import RecordRTC from 'recordrtc';
 import Nav from '../Nav';
+import {url} from '../Constant.js';
 
 function RecordVideo() {
     const [file, setFile] = useState(null);
@@ -41,7 +42,7 @@ function RecordVideo() {
         }, [20000]);
 
         try {
-            const res = await fetch('http://localhost:8000/uploads', {
+            const res = await fetch('${url}/uploads', {
                 method: 'POST',
                 Headers: {
                     "Content-Type": "multipart/form-data"
@@ -69,7 +70,7 @@ function RecordVideo() {
 
 
     const getData = async () => {
-        const res = await fetch('http://localhost:8000/getFile')
+        const res = await fetch(`${url}/getFile`)
         const data = await res.json();
         const transcriptionResult = data.getData;
         console.log(transcriptionResult)
@@ -84,7 +85,7 @@ function RecordVideo() {
 
     const deleteUser = async (id) => {
         console.log(id)
-        await fetch(`http://localhost:8000/delete/${id}`, {
+        await fetch(`${url}/delete/${id}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
@@ -103,7 +104,7 @@ function RecordVideo() {
         console.log(transcription, id)
 
         try {
-            const response = await fetch(`http://localhost:8000/generate-feedback/${id}`, {
+            const response = await fetch(`${url}/generate-feedback/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -15,6 +15,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {url} from '../Constant.js'
 
 const defaultTheme = createTheme();
 
@@ -38,7 +39,7 @@ export default function SignIn() {
         event.preventDefault();
       
         try {
-          const response = await fetch("http://localhost:8000/hr/login", {
+          const response = await fetch(`${url}/hr/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
