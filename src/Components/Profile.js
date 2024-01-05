@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import {url} from '../Components/Constant.js';
+
 
 const currencies = [
   {
@@ -86,7 +88,7 @@ const ProfileForm = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/user/profile",
+        `${url}/user/profile`,
         formData,
         {
           headers: {

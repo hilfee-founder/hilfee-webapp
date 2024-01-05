@@ -15,6 +15,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
+import {url} from '../Constant.js';
+
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -42,7 +44,7 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
   
-    fetch("http://localhost:8000/hr/signup", {
+    fetch(`${url}/hr/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +57,7 @@ export default function SignUp() {
           // Signup successful toast
           toast.success("Signup successful: " + data.message);
           console.log("Signup successful:", data);
-          navigate("/Hrlogin");
+          navigate("/hr/login");
         } else {
           // Signup failed toast
           toast.error("Signup failed: " + data.message);
