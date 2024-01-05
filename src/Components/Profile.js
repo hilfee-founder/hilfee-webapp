@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Profile.css";
+import "./Assets/Styles/Profile.css";
 import Nav from "./Nav";
 import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -333,11 +333,11 @@ const ProfileForm = () => {
         })}
       </div>
       <div>
-          <button onClick={linkToVideo} style={{ width: "150px", margin: "20px" }}>Record Video</button>
+          <button className="pbtn" onClick={linkToVideo} style={{ width: "150px", margin: "20px" }}>Record Video</button>
         
-        <button style={{ width: "150px", margin: "20px" }}>Update</button>
-        <button style={{ width: "150px", margin: "20px" }}>Feedback</button>
-        <button
+        <button className="pbtn" style={{ width: "150px", margin: "20px" }}>Update</button>
+        <button className="pbtn" style={{ width: "150px", margin: "20px" }}>Feedback</button>
+        <button className="pbtn"
           style={{ width: "150px", margin: "20px" }}
           onClick={handleSubmit}
         >

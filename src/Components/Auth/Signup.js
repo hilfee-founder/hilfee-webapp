@@ -25,8 +25,6 @@ export default function SignUp() {
     email: '',
     number:'',
     password: '',
-   
-
   });
 
   const handleChange = (event) => {
@@ -48,8 +46,9 @@ export default function SignUp() {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
+      .then((response) => console.log(response))
       .then((data) => {
+        console.log(data);
         if (data.success) {
           // Signup successful toast
           toast.success("Signup successful: " + data.message);

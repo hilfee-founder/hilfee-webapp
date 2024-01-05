@@ -1,0 +1,26 @@
+.logo-name{
+    font-weight: bolder;
+    font-size:xx-large;
+}
+
+.nav-bar{
+    width: 100%;
+    padding:0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.nav-link{
+    display: inline;
+    border: 2px solid rgb(164, 163, 163);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+
