@@ -46,9 +46,8 @@ export default function SignUp() {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => console.log(response))
+      .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           // Signup successful toast
           toast.success("Signup successful: " + data.message);
