@@ -1,0 +1,39 @@
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  .row {
+    margin-bottom: 1rem;
+  }
+
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Form Styles */
+label {
+  font-weight: bold;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.edit-form-icon {
+  float: right;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}

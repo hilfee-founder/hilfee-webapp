@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import "./Profile.css";
 import Nav from "./Nav";
-import { TextField } from "@mui/material";
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
+import { TextField ,Box,MenuItem} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {url} from '../Components/Constant.js';
+import "./Assets/Styles/profile.css";
 
 
 const currencies = [

@@ -1,185 +1,171 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';  // Assuming you are using React Router for navigation
-import Button from '@mui/material/Button';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "../Assets/Styles/hrprofile.css";
+import {url} from '../Constant.js';
 
-const settings = ['Profile', 'Job Posting', 'Logout'];
+const CompanyForm = () => {
+    const [isEditMode, setIsEditMode] = useState(false);
 
-function Hrprofile() {
-  const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleEditClick = () => {
+    setIsEditMode(true);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleCancelClick = () => {
+    setIsEditMode(false);
+  };
+  const [formData, setFormData] = useState({
+    companyName: '',
+    companyEmail: '',
+    contactNumber: '',
+    companyLocation: '',
+    numberOfEmployees: '',
+    industryType: '',
+    aboutCompany: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add logic to handle form submission
-    console.log('Form submitted:', {
-      industry,
-      exp1,
-      role,
-      category,
-      exp2,
-      location,
-      department,
-      exp3,
-      ctcRange,
-      overallExp,
-      technicalTools,
-    });
+    // Handle form submission logic here
+    console.log(formData);
   };
 
-  const [industry, setIndustry] = useState('');
-  const [exp1, setExp1] = useState('');
-  const [role, setRole] = useState('');
-  const [category, setCategory] = useState('');
-  const [exp2, setExp2] = useState('');
-  const [location, setLocation] = useState('');
-  const [department, setDepartment] = useState('');
-  const [exp3, setExp3] = useState('');
-  const [ctcRange, setCtcRange] = useState('');
-  const [overallExp, setOverallExp] = useState('');
-  const [technicalTools, setTechnicalTools] = useState('');
+  return (<>
+  
+    <Container className="mt-5">
+      <div>
+      <i
+        className="bi bi-pencil-square edit-form-icon"
+        onClick={handleEditClick}
+        disabled={isEditMode}
+      ></i>
+      </div>
+    
+      <Form onSubmit={handleSubmit}>
+        {/* 1st Row */}
+        <Row className="mb-3">
+          <Col md={4}>
+            <Form.Group controlId="companyName">
+              <Form.Label className="text-muted">Company Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group controlId="companyEmail">
+              <Form.Label className="text-muted">Company Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="companyEmail"
+                value={formData.companyEmail}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group controlId="contactNumber">
+              <Form.Label className="text-muted">Contact Number</Form.Label>
+              <Form.Control
+                type="text"
+                name="contactNumber"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-  return (
-    <div>
-     <AppBar position="static">
-  <Container maxWidth="xl">
-    <Toolbar disableGutters>
-      <Box sx={{ flexGrow: 1 }} />
+        {/* 2nd Row */}
+        <Row className="mb-3">
+          <Col md={4}>
+            <Form.Group controlId="companyLocation">
+              <Form.Label className="text-muted">Company Location</Form.Label>
+              <Form.Control
+                type="text"
+                name="companyLocation"
+                value={formData.companyLocation}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group controlId="industryType">
+              <Form.Label className="text-muted">Industry Type</Form.Label>
+              <Form.Control
+                type="text"
+                name="industryType"
+                value={formData.industryType}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group controlId="numberOfEmployees">
+              <Form.Label className="text-muted">Number of Employees</Form.Label>
+              <Form.Control
+                type="number"
+                name="numberOfEmployees"
+                value={formData.numberOfEmployees}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-      {/* Add the "Post a Job" link in the middle */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          
-        </Typography>
-        <Link to="/post-job" color="inherit" style={{ textDecoration: 'none' }}>
-          <Button color="inherit">Post a Job</Button>
-        </Link>
-      </Box>
+        {/* 3rd Row */}
+        <Row className="mb-3">
+          <Col>
+            <Form.Group controlId="aboutCompany">
+              <Form.Label className="text-muted">About Company (Description)</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="aboutCompany"
+                value={formData.aboutCompany}
+                onChange={handleChange}
+                disabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-      {/* User menu */}
-      <Box sx={{ ml: 2 }}>
-        <Tooltip title="Open settings">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-          </IconButton>
-        </Tooltip>
-        <Menu
-          sx={{ mt: '45px' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{setting}</Typography>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-    </Toolbar>
-  </Container>
-</AppBar>
-
-
-      <Container maxWidth="md" style={{ marginTop: '20px' }}>
-        <form onSubmit={handleSubmit}>
-          <div style={{ display: 'flex', marginBottom: '10px' }}>
-            <div style={{ marginRight: '10px' }}>
-              <label>Industry:</label>
-              <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} />
-            </div>
-            <div>
-              <label>Experience:</label>
-              <input type="text" value={exp1} onChange={(e) => setExp1(e.target.value)} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', marginBottom: '10px' }}>
-            <div style={{ marginRight: '10px' }}>
-              <label>Role:</label>
-              <input type="text" value={role} onChange={(e) => setRole(e.target.value)} />
-            </div>
-            <div style={{ marginRight: '10px' }}>
-              <label>Category:</label>
-              <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
-            </div>
-            <div   style={{ marginRight: '10px' }}>
-              <label>Experience:</label>
-              <input type="text" value={exp2} onChange={(e) => setExp2(e.target.value)} />
-            </div>
-            <div>
-              <label>Location:</label>
-              <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', marginBottom: '10px' }}>
-            <div style={{ marginRight: '10px' }}>
-              <label>Department:</label>
-              <input type="text" value={department} onChange={(e) => setDepartment(e.target.value)} />
-            </div>
-            <div style={{ marginRight: '10px' }}>
-              <label>Experience:</label>
-              <input type="text" value={exp3} onChange={(e) => setExp3(e.target.value)} />
-            </div>
-            <div>
-              <label>Ctc Range:</label>
-              <input type="text" value={ctcRange} onChange={(e) => setCtcRange(e.target.value)} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', marginBottom: '10px' }}>
-            <div style={{ marginRight: '10px' }}>
-              <label>Overall Experience:</label>
-              <input type="text" value={overallExp} onChange={(e) => setOverallExp(e.target.value)} />
-            </div>
-            <div>
-              <label>Technical Tools:</label>
-              <input type="text" value={technicalTools} onChange={(e) => setTechnicalTools(e.target.value)} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', marginBottom: '10px' }}>
-            <div>
-              <label>Upload CV:</label>
-              <input type="file" />
-            </div>
-            <div style={{ float: 'right', marginBottom: '10px' }}>
-            <button type="submit">Submit</button>
-          </div>
-          </div>
-
-          
-        </form>
-      </Container>
-    </div>
+        {/* 4th Row */}
+        <div className='btn'>
+        
+        <div className="mb-3" />
+        <Row>
+          <Col md={3} className="d-flex align-items-end">
+            <Button type="submit" variant="primary" className="save-button">
+              Save
+            </Button>
+          </Col>
+          <Col md={3} className="d-flex align-items-end">
+            <Button variant="secondary" onClick={handleCancelClick} className="cancel-button">
+              Cancel
+            </Button>
+          </Col>
+        </Row>
+        </div>
+      </Form>
+    </Container>
+    </>
   );
-}
+};
 
-export default Hrprofile;
+export default CompanyForm;
