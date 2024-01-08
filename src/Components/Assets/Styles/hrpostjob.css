@@ -28,7 +28,7 @@ label {
 .form-field-container {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .edit-form-icon {
   float: right;

@@ -3,10 +3,10 @@ import { Container, Row, Col, Form, Button, Dropdown } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Assets/Styles/profile1.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Image from "react-bootstrap/Image";
+import { FaUser } from "react-icons/fa";
 import Select from "react-select";
-
-
-
+// import {url} from '../Constant.js';
 
 const MyForm = () => {
   const [fullName, setFullName] = useState("");
@@ -29,35 +29,55 @@ const MyForm = () => {
   const [videoResume, setVideoResume] = useState("");
 
   const technicalSkillsOptions = [
-    { value: 'html', label: 'HTML' },
-    { value: 'css', label: 'CSS' },
-    { value: 'java', label: 'Java' },
+    { value: "html", label: "HTML" },
+    { value: "css", label: "CSS" },
+    { value: "java", label: "Java" },
   ];
-  
+
   // Options for CTC
   const ctcOptions = [
-    { value: '0-5', label: '0-5 LPA' },
-    { value: '5-10', label: '5-10 LPA' },
-    { value: '10-15', label: '10-15 LPA' },
+    { value: "0-5", label: "0-5 LPA" },
+    { value: "5-10", label: "5-10 LPA" },
+    { value: "10-15", label: "10-15 LPA" },
   ];
-  
+
   // Options for Location
   const locationOptions = [
-    { value: 'delhi', label: 'Delhi' },
-    { value: 'mumbai', label: 'Mumbai' },
-    { value: 'bangalore', label: 'Bangalore' },
+    { value: "delhi", label: "Delhi" },
+    { value: "mumbai", label: "Mumbai" },
+    { value: "bangalore", label: "Bangalore" },
   ];
-  
+
   // Options for Certification
   const certificationOptions = [
-    { value: 'aws', label: 'AWS Certified' },
-    { value: 'java-se', label: 'Java SE Certification' },
-    { value: 'python', label: 'Python Certification' },
+    { value: "aws", label: "AWS Certified" },
+    { value: "java-se", label: "Java SE Certification" },
+    { value: "python", label: "Python Certification" },
   ];
   const [certificationValues, setCertificationValues] = useState([
     "Certification 1",
   ]);
   // Set to true or false based on your logic
+  const [profileImage, setProfileImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      try {
+        const imageUrl = URL.createObjectURL(file);
+        setProfileImage({ file, imageUrl });
+      } catch (error) {
+        console.error("Error creating object URL:", error);
+      }
+    }
+  };
+
+  // Placeholder for handleImageUpload function - replace with your actual implementation
+  const handleImageUpload = () => {
+    // Your logic for handling image upload goes here
+    console.log("Image upload logic");
+  };
 
   const handleCertificationChange = (e) => {
     setCertificationValues(
@@ -96,6 +116,60 @@ const MyForm = () => {
         disabled={isEditMode}
       ></i>
       <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col md={4}>
+            <Col>
+              <div>
+                <div
+                  className="rounded-container"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    backgroundColor: "#eee",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {profileImage ? (
+                    <img
+                      src={profileImage.imageUrl}
+                      alt="Profile"
+                      className="rounded-circle"
+                      style={{ width: "50px", height: "50px" }}
+                    />
+                  ) : (
+                    <FaUser style={{ fontSize: "50px", color: "#555" }} />
+                  )}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "10px",
+                }}
+              >
+                {/* Choose File input */}
+                <input
+                  type="file"
+                  onChange={handleImageChange}
+                  style={{ marginRight: "10px" }}
+                  disabled={!isEditMode} // Corrected the negation
+                />
+
+                <button
+                  onClick={handleImageUpload}
+                  className="upload-button"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Upload
+                </button>
+              </div>
+            </Col>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Form.Group controlId="fullName">
@@ -268,64 +342,63 @@ const MyForm = () => {
 
         {/* Skills and Certifications */}
         <Row>
-  <Col>
-    <Form.Group controlId="technicalSkills">
-      <Form.Label>Technical Skills:</Form.Label>
-      <Select
-        defaultValue={[technicalSkillsOptions[0]]}
-        isMulti
-        name="technicalSkills"
-        options={technicalSkillsOptions}
-        className="basic-multi-select"
-        classNamePrefix="select"
-        isDisabled={!isEditMode}
-      />
-    </Form.Group>
-  </Col>
-  <Col>
-    <Form.Group controlId="ctc">
-      <Form.Label>CTC:</Form.Label>
-      <Select
-        defaultValue={[ctcOptions[0]]}
-        isMulti
-        name="ctc"
-        options={ctcOptions}
-        className="basic-multi-select"
-        classNamePrefix="select"
-        isDisabled={!isEditMode}
-      />
-    </Form.Group>
-  </Col>
-  <Col>
-    <Form.Group controlId="location">
-      <Form.Label>Location:</Form.Label>
-      <Select
-        defaultValue={[locationOptions[0]]}
-        isMulti
-        name="location"
-        options={locationOptions}
-        className="basic-multi-select"
-        classNamePrefix="select"
-        isDisabled={!isEditMode}
-      />
-    </Form.Group>
-  </Col>
-  <Col>
-    <Form.Group controlId="certification">
-      <Form.Label>Certification:</Form.Label>
-      <Select
-        defaultValue={[certificationOptions[0]]}
-        isMulti
-        name="certification"
-        options={certificationOptions}
-        className="basic-multi-select"
-        classNamePrefix="select"
-        isDisabled={!isEditMode}
-      />
-    </Form.Group>
-  </Col>
-</Row>
-
+          <Col>
+            <Form.Group controlId="technicalSkills">
+              <Form.Label>Technical Skills:</Form.Label>
+              <Select
+                defaultValue={[technicalSkillsOptions[0]]}
+                isMulti
+                name="technicalSkills"
+                options={technicalSkillsOptions}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                isDisabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="ctc">
+              <Form.Label>CTC:</Form.Label>
+              <Select
+                defaultValue={[ctcOptions[0]]}
+                isMulti
+                name="ctc"
+                options={ctcOptions}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                isDisabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="location">
+              <Form.Label>Location:</Form.Label>
+              <Select
+                defaultValue={[locationOptions[0]]}
+                isMulti
+                name="location"
+                options={locationOptions}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                isDisabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="certification">
+              <Form.Label>Certification:</Form.Label>
+              <Select
+                defaultValue={[certificationOptions[0]]}
+                isMulti
+                name="certification"
+                options={certificationOptions}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                isDisabled={!isEditMode}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
         {/* Actions */}
         <Container fluid className="mt-3">
