@@ -1,0 +1,52 @@
+.recordVideoButton {
+  width: 150px;
+  margin-right: 10px;
+}
+
+.submitButton {
+  width: 150px;
+}
+
+.feedbackButton {
+  width: 150px;
+}
+.edit-form-icon {
+  float: right;
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start; /* Set to flex-start to align to the top */
+  /* Set container height to full viewport height */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row; /* Adjusted to column */
+  gap: 10px; /* Add some space between buttons */
+}
+
+.button-container button,
+.button-container .btn {
+  width: 150px;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.col-md-6 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.col-md-6 .btn {
+  width: 80px;
+  margin-right: 5px; /* Adjust the gap between buttons */
+
+  border: 1px solid #ddd; /* Add border for better visibility */
+}

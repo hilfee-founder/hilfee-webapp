@@ -1,0 +1,66 @@
+/* Container for the dashboard and content */
+.container {
+  display: flex;
+}
+
+/* Style for the dashboard on the left */
+.dashboard {
+  width: 20%;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.dashboard a {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Style for the main content on the right */
+.content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Style for the form elements */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style for the additional links */
+.additional-links {
+  margin-top: 20px;
+}
+
+.additional-links a {
+  display: flex;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #007bff;
+}
