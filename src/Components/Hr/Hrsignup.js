@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {url} from '../Constant';
 import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -15,7 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
-import {url} from '../Constant.js';
+
 
 
 export default function SignUp() {
