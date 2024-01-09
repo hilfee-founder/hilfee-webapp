@@ -25,8 +25,6 @@ export default function SignUp() {
     email: '',
     number:'',
     password: '',
-   
-
   });
 
   const handleChange = (event) => {

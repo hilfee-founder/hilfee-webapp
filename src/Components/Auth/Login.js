@@ -19,7 +19,6 @@ import {url} from '../Constant.js';
 
 const defaultTheme = createTheme();
 
-
 export default function SignIn() {
   const [formData, setFormData] = useState({
     email: '',
@@ -52,7 +51,6 @@ export default function SignIn() {
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(errorData.message);
-
         console.error("Server error:", errorData.message);
         return;
       }
@@ -61,6 +59,7 @@ export default function SignIn() {
       
       if (data.success) {
         console.log("Login successful:", data.message);
+        localStorage.setItem('token',data.token,60*1000)
         navigate("/profile");
       } else {
         console.error("Login failed:", data.message);
@@ -70,8 +69,6 @@ export default function SignIn() {
     }
   };
   
-  
-
   return (
     <ThemeProvider theme={defaultTheme}><ToastContainer />
       <Container component="main" maxWidth="xs">

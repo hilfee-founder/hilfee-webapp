@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+
+import "./Assets/Styles/Profile.css";
+
 import Nav from "./Nav";
 import { TextField ,Box,MenuItem} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {url} from '../Components/Constant.js';
-import "./Assets/Styles/profile.css";
+// import "./Assets/Styles/profile.css";
 
 
 const currencies = [
@@ -331,11 +334,11 @@ const ProfileForm = () => {
         })}
       </div>
       <div>
-          <button onClick={linkToVideo} style={{ width: "150px", margin: "20px" }}>Record Video</button>
+          <button className="pbtn" onClick={linkToVideo} style={{ width: "150px", margin: "20px" }}>Record Video</button>
         
-        <button style={{ width: "150px", margin: "20px" }}>Update</button>
-        <button style={{ width: "150px", margin: "20px" }}>Feedback</button>
-        <button
+        <button className="pbtn" style={{ width: "150px", margin: "20px" }}>Update</button>
+        <button className="pbtn" style={{ width: "150px", margin: "20px" }}>Feedback</button>
+        <button className="pbtn"
           style={{ width: "150px", margin: "20px" }}
           onClick={handleSubmit}
         >
