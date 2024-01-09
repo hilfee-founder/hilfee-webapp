@@ -59,7 +59,7 @@ export default function SignIn() {
       
       if (data.success) {
         console.log("Login successful:", data.message);
-        localStorage.setItem('token',data.token)
+        localStorage.setItem('token',data.token,60*1000)
         navigate("/profile");
       } else {
         console.error("Login failed:", data.message);

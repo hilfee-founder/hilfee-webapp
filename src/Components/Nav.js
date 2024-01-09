@@ -23,18 +23,15 @@ const Nav = () => {
           'token': localStorage.getItem('token')
         },
       });
-      console.log(response);
-      const data = await response.json();
-      console.log(data);
+      // console.log(response);
+      // const data = await response.json();
+      // console.log(data);
     }
     catch(e){
-      console.log(e);
+      console.log('error in verifying token:',e);
     }
   }
   
-
-  console.log('Token in localStorage:', localStorage.getItem('token'));
-
   useEffect(() => {
     const fetchData = async () => {
       if (!localStorage.getItem("token")) {
